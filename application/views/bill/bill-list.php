@@ -359,6 +359,8 @@
     	$('#bill_test').DataTable({
 	        	dom: 'Bfrtip',
 	        	paging: false,
+				searching: false,
+				ordering: false,
 	        	buttons: [
 	            	'copy', 'csv', 'excel', 'pdf', 'print'
 	        	]

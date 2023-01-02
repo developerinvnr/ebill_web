@@ -82,7 +82,7 @@ class Dashboard_ctrl extends CI_Controller {
       $last_date = cal_days_in_month(CAL_GREGORIAN,$month,$year);
       $todate = $year.'-'.str_pad($month, 2, '0', STR_PAD_LEFT).'-'.$last_date;
       
-      $query = "select mm.cid,cm.name as company_name,sum(b.gross_amount) as total_bill from meter_master mm
+      $query = "select mm.cid,cm.name as company_name,sum(b.payable_amount) as total_bill from meter_master mm
                         JOIN bill b on b.sno_id = mm.mid AND b.from_date BETWEEN '".$fromdate."' AND '".$todate."'
                         JOIN company_master cm on cm.cid = mm.cid";
       if($company != ''){
@@ -131,7 +131,7 @@ class Dashboard_ctrl extends CI_Controller {
             $data = $this->db->select("
                 cm.cid as company_id, 
                 cm.name as company_name, 
-                sum(b.gross_amount) as payable_amount,
+                sum(b.payable_amount) as payable_amount,
                 sum(b.payment_amount) as payment_amount
             ")
             ->from("bill b")
@@ -148,7 +148,7 @@ class Dashboard_ctrl extends CI_Controller {
             $data = $this->db->select("
                 cm.cid as company_id, 
                 cm.name as company_name, 
-                sum(b.gross_amount) as payable_amount,
+                sum(b.payable_amount) as payable_amount,
                 sum(b.payment_amount) as payment_amount
             ")
             ->from("bill b")
@@ -167,7 +167,7 @@ class Dashboard_ctrl extends CI_Controller {
             $data = $this->db->select("
                 cm.cid as company_id, 
                 cm.name as company_name, 
-                sum(b.gross_amount) as payable_amount,
+                sum(b.payable_amount) as payable_amount,
                 sum(b.payment_amount) as payment_amount
             ")
             ->from("bill b")
@@ -253,7 +253,7 @@ class Dashboard_ctrl extends CI_Controller {
                 mm.bpno,
                 b.bill_no,
                 UPPER(DATE_FORMAT(b.from_date, '%b-%Y')) as bill_month,
-                b.gross_amount as payable_amount,
+                b.payable_amount as payable_amount,
                 b.payment_amount as payment_amount
             ")
             ->from("bill b")
@@ -270,7 +270,7 @@ class Dashboard_ctrl extends CI_Controller {
                 mm.bpno,
                 b.bill_no,
                 UPPER(DATE_FORMAT(b.from_date, '%b-%Y')) as bill_month,
-                b.gross_amount as payable_amount,
+                b.payable_amount as payable_amount,
                 b.payment_amount as payment_amount
             ")
             ->from("bill b")
@@ -289,7 +289,7 @@ class Dashboard_ctrl extends CI_Controller {
                 mm.bpno,
                 b.bill_no,
                 UPPER(DATE_FORMAT(b.from_date, '%b-%Y')) as bill_month,
-                b.gross_amount as payable_amount,
+                b.payable_amount as payable_amount,
                 b.payment_amount as payment_amount
             ")
             ->from("bill b")
@@ -396,19 +396,19 @@ class Dashboard_ctrl extends CI_Controller {
                     GROUP_CONCAT(CASE WHEN (month(from_date) = 11) THEN b.bill_no ELSE NULL END) AS nov_bill_no,
                     GROUP_CONCAT(CASE WHEN (month(from_date) = 12) THEN b.bill_no ELSE NULL END) AS dec_bill_no,
                     
-                    SUM(CASE WHEN (month(from_date) = 1) THEN b.gross_amount ELSE 0 END) AS jan_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 2) THEN b.gross_amount ELSE 0 END) AS feb_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 3) THEN b.gross_amount ELSE 0 END) AS mar_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 4) THEN b.gross_amount ELSE 0 END) AS apr_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 5) THEN b.gross_amount ELSE 0 END) AS may_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 6) THEN b.gross_amount ELSE 0 END) AS jun_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 7) THEN b.gross_amount ELSE 0 END) AS jul_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 8) THEN b.gross_amount ELSE 0 END) AS aug_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 9) THEN b.gross_amount ELSE 0 END) AS sep_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 10) THEN b.gross_amount ELSE 0 END) AS oct_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 11) THEN b.gross_amount ELSE 0 END) AS nov_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 12) THEN b.gross_amount ELSE 0 END) AS dec_payable_amount,
-                    sum(b.gross_amount) as total_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 1) THEN b.payable_amount ELSE 0 END) AS jan_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 2) THEN b.payable_amount ELSE 0 END) AS feb_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 3) THEN b.payable_amount ELSE 0 END) AS mar_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 4) THEN b.payable_amount ELSE 0 END) AS apr_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 5) THEN b.payable_amount ELSE 0 END) AS may_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 6) THEN b.payable_amount ELSE 0 END) AS jun_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 7) THEN b.payable_amount ELSE 0 END) AS jul_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 8) THEN b.payable_amount ELSE 0 END) AS aug_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 9) THEN b.payable_amount ELSE 0 END) AS sep_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 10) THEN b.payable_amount ELSE 0 END) AS oct_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 11) THEN b.payable_amount ELSE 0 END) AS nov_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 12) THEN b.payable_amount ELSE 0 END) AS dec_payable_amount,
+                    sum(b.payable_amount) as total_payable_amount,
 
                     SUM(CASE WHEN (month(from_date) = 1) THEN b.payment_amount ELSE 0 END) AS jan_payment_amount,
                     SUM(CASE WHEN (month(from_date) = 2) THEN b.payment_amount ELSE 0 END) AS feb_payment_amount,
@@ -454,19 +454,19 @@ class Dashboard_ctrl extends CI_Controller {
                     GROUP_CONCAT(CASE WHEN (month(from_date) = 11) THEN b.bill_no ELSE NULL END) AS nov_bill_no,
                     GROUP_CONCAT(CASE WHEN (month(from_date) = 12) THEN b.bill_no ELSE NULL END) AS dec_bill_no,
 
-                    SUM(CASE WHEN (month(from_date) = 1) THEN b.gross_amount ELSE 0 END) AS jan_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 2) THEN b.gross_amount ELSE 0 END) AS feb_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 3) THEN b.gross_amount ELSE 0 END) AS mar_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 4) THEN b.gross_amount ELSE 0 END) AS apr_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 5) THEN b.gross_amount ELSE 0 END) AS may_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 6) THEN b.gross_amount ELSE 0 END) AS jun_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 7) THEN b.gross_amount ELSE 0 END) AS jul_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 8) THEN b.gross_amount ELSE 0 END) AS aug_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 9) THEN b.gross_amount ELSE 0 END) AS sep_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 10) THEN b.gross_amount ELSE 0 END) AS oct_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 11) THEN b.gross_amount ELSE 0 END) AS nov_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 12) THEN b.gross_amount ELSE 0 END) AS dec_payable_amount,
-                    sum(b.gross_amount) as total_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 1) THEN b.payable_amount ELSE 0 END) AS jan_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 2) THEN b.payable_amount ELSE 0 END) AS feb_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 3) THEN b.payable_amount ELSE 0 END) AS mar_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 4) THEN b.payable_amount ELSE 0 END) AS apr_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 5) THEN b.payable_amount ELSE 0 END) AS may_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 6) THEN b.payable_amount ELSE 0 END) AS jun_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 7) THEN b.payable_amount ELSE 0 END) AS jul_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 8) THEN b.payable_amount ELSE 0 END) AS aug_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 9) THEN b.payable_amount ELSE 0 END) AS sep_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 10) THEN b.payable_amount ELSE 0 END) AS oct_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 11) THEN b.payable_amount ELSE 0 END) AS nov_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 12) THEN b.payable_amount ELSE 0 END) AS dec_payable_amount,
+                    sum(b.payable_amount) as total_payable_amount,
 
                     SUM(CASE WHEN (month(from_date) = 1) THEN b.payment_amount ELSE 0 END) AS jan_payment_amount,
                     SUM(CASE WHEN (month(from_date) = 2) THEN b.payment_amount ELSE 0 END) AS feb_payment_amount,
@@ -514,19 +514,19 @@ class Dashboard_ctrl extends CI_Controller {
                     GROUP_CONCAT(CASE WHEN (month(from_date) = 11) THEN b.bill_no ELSE NULL END) AS nov_bill_no,
                     GROUP_CONCAT(CASE WHEN (month(from_date) = 12) THEN b.bill_no ELSE NULL END) AS dec_bill_no,
 
-                    SUM(CASE WHEN (month(from_date) = 1) THEN b.gross_amount ELSE 0 END) AS jan_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 2) THEN b.gross_amount ELSE 0 END) AS feb_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 3) THEN b.gross_amount ELSE 0 END) AS mar_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 4) THEN b.gross_amount ELSE 0 END) AS apr_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 5) THEN b.gross_amount ELSE 0 END) AS may_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 6) THEN b.gross_amount ELSE 0 END) AS jun_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 7) THEN b.gross_amount ELSE 0 END) AS jul_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 8) THEN b.gross_amount ELSE 0 END) AS aug_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 9) THEN b.gross_amount ELSE 0 END) AS sep_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 10) THEN b.gross_amount ELSE 0 END) AS oct_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 11) THEN b.gross_amount ELSE 0 END) AS nov_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 12) THEN b.gross_amount ELSE 0 END) AS dec_payable_amount,
-                    sum(b.gross_amount) as total_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 1) THEN b.payable_amount ELSE 0 END) AS jan_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 2) THEN b.payable_amount ELSE 0 END) AS feb_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 3) THEN b.payable_amount ELSE 0 END) AS mar_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 4) THEN b.payable_amount ELSE 0 END) AS apr_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 5) THEN b.payable_amount ELSE 0 END) AS may_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 6) THEN b.payable_amount ELSE 0 END) AS jun_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 7) THEN b.payable_amount ELSE 0 END) AS jul_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 8) THEN b.payable_amount ELSE 0 END) AS aug_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 9) THEN b.payable_amount ELSE 0 END) AS sep_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 10) THEN b.payable_amount ELSE 0 END) AS oct_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 11) THEN b.payable_amount ELSE 0 END) AS nov_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 12) THEN b.payable_amount ELSE 0 END) AS dec_payable_amount,
+                    sum(b.payable_amount) as total_payable_amount,
 
                     SUM(CASE WHEN (month(from_date) = 1) THEN b.payment_amount ELSE 0 END) AS jan_payment_amount,
                     SUM(CASE WHEN (month(from_date) = 2) THEN b.payment_amount ELSE 0 END) AS feb_payment_amount,
@@ -879,19 +879,19 @@ class Dashboard_ctrl extends CI_Controller {
             {
                 $data = $this->db->select("
                     cm.name as company_name,
-                    SUM(CASE WHEN (month(from_date) = 1) THEN b.gross_amount ELSE 0 END) AS jan_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 2) THEN b.gross_amount ELSE 0 END) AS feb_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 3) THEN b.gross_amount ELSE 0 END) AS mar_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 4) THEN b.gross_amount ELSE 0 END) AS apr_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 5) THEN b.gross_amount ELSE 0 END) AS may_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 6) THEN b.gross_amount ELSE 0 END) AS jun_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 7) THEN b.gross_amount ELSE 0 END) AS jul_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 8) THEN b.gross_amount ELSE 0 END) AS aug_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 9) THEN b.gross_amount ELSE 0 END) AS sep_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 10) THEN b.gross_amount ELSE 0 END) AS oct_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 11) THEN b.gross_amount ELSE 0 END) AS nov_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 12) THEN b.gross_amount ELSE 0 END) AS dec_payable_amount,
-                    sum(b.gross_amount) as total_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 1) THEN b.payable_amount ELSE 0 END) AS jan_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 2) THEN b.payable_amount ELSE 0 END) AS feb_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 3) THEN b.payable_amount ELSE 0 END) AS mar_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 4) THEN b.payable_amount ELSE 0 END) AS apr_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 5) THEN b.payable_amount ELSE 0 END) AS may_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 6) THEN b.payable_amount ELSE 0 END) AS jun_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 7) THEN b.payable_amount ELSE 0 END) AS jul_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 8) THEN b.payable_amount ELSE 0 END) AS aug_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 9) THEN b.payable_amount ELSE 0 END) AS sep_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 10) THEN b.payable_amount ELSE 0 END) AS oct_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 11) THEN b.payable_amount ELSE 0 END) AS nov_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 12) THEN b.payable_amount ELSE 0 END) AS dec_payable_amount,
+                    sum(b.payable_amount) as total_payable_amount,
 
                     SUM(CASE WHEN (month(from_date) = 1) THEN b.payment_amount ELSE 0 END) AS jan_payment_amount,
                     SUM(CASE WHEN (month(from_date) = 2) THEN b.payment_amount ELSE 0 END) AS feb_payment_amount,
@@ -920,19 +920,19 @@ class Dashboard_ctrl extends CI_Controller {
 
                 $data = $this->db->select("
                     cm.name as company_name,
-                    SUM(CASE WHEN (month(from_date) = 1) THEN b.gross_amount ELSE 0 END) AS jan_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 2) THEN b.gross_amount ELSE 0 END) AS feb_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 3) THEN b.gross_amount ELSE 0 END) AS mar_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 4) THEN b.gross_amount ELSE 0 END) AS apr_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 5) THEN b.gross_amount ELSE 0 END) AS may_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 6) THEN b.gross_amount ELSE 0 END) AS jun_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 7) THEN b.gross_amount ELSE 0 END) AS jul_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 8) THEN b.gross_amount ELSE 0 END) AS aug_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 9) THEN b.gross_amount ELSE 0 END) AS sep_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 10) THEN b.gross_amount ELSE 0 END) AS oct_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 11) THEN b.gross_amount ELSE 0 END) AS nov_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 12) THEN b.gross_amount ELSE 0 END) AS dec_payable_amount,
-                    sum(b.gross_amount) as total_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 1) THEN b.payable_amount ELSE 0 END) AS jan_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 2) THEN b.payable_amount ELSE 0 END) AS feb_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 3) THEN b.payable_amount ELSE 0 END) AS mar_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 4) THEN b.payable_amount ELSE 0 END) AS apr_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 5) THEN b.payable_amount ELSE 0 END) AS may_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 6) THEN b.payable_amount ELSE 0 END) AS jun_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 7) THEN b.payable_amount ELSE 0 END) AS jul_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 8) THEN b.payable_amount ELSE 0 END) AS aug_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 9) THEN b.payable_amount ELSE 0 END) AS sep_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 10) THEN b.payable_amount ELSE 0 END) AS oct_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 11) THEN b.payable_amount ELSE 0 END) AS nov_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 12) THEN b.payable_amount ELSE 0 END) AS dec_payable_amount,
+                    sum(b.payable_amount) as total_payable_amount,
 
                     SUM(CASE WHEN (month(from_date) = 1) THEN b.payment_amount ELSE 0 END) AS jan_payment_amount,
                     SUM(CASE WHEN (month(from_date) = 2) THEN b.payment_amount ELSE 0 END) AS feb_payment_amount,
@@ -963,19 +963,19 @@ class Dashboard_ctrl extends CI_Controller {
 
                 $data = $this->db->select("
                     cm.name as company_name,
-                    SUM(CASE WHEN (month(from_date) = 1) THEN b.gross_amount ELSE 0 END) AS jan_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 2) THEN b.gross_amount ELSE 0 END) AS feb_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 3) THEN b.gross_amount ELSE 0 END) AS mar_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 4) THEN b.gross_amount ELSE 0 END) AS apr_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 5) THEN b.gross_amount ELSE 0 END) AS may_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 6) THEN b.gross_amount ELSE 0 END) AS jun_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 7) THEN b.gross_amount ELSE 0 END) AS jul_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 8) THEN b.gross_amount ELSE 0 END) AS aug_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 9) THEN b.gross_amount ELSE 0 END) AS sep_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 10) THEN b.gross_amount ELSE 0 END) AS oct_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 11) THEN b.gross_amount ELSE 0 END) AS nov_payable_amount,
-                    SUM(CASE WHEN (month(from_date) = 12) THEN b.gross_amount ELSE 0 END) AS dec_payable_amount,
-                    sum(b.gross_amount) as total_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 1) THEN b.payable_amount ELSE 0 END) AS jan_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 2) THEN b.payable_amount ELSE 0 END) AS feb_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 3) THEN b.payable_amount ELSE 0 END) AS mar_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 4) THEN b.payable_amount ELSE 0 END) AS apr_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 5) THEN b.payable_amount ELSE 0 END) AS may_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 6) THEN b.payable_amount ELSE 0 END) AS jun_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 7) THEN b.payable_amount ELSE 0 END) AS jul_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 8) THEN b.payable_amount ELSE 0 END) AS aug_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 9) THEN b.payable_amount ELSE 0 END) AS sep_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 10) THEN b.payable_amount ELSE 0 END) AS oct_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 11) THEN b.payable_amount ELSE 0 END) AS nov_payable_amount,
+                    SUM(CASE WHEN (month(from_date) = 12) THEN b.payable_amount ELSE 0 END) AS dec_payable_amount,
+                    sum(b.payable_amount) as total_payable_amount,
 
                     SUM(CASE WHEN (month(from_date) = 1) THEN b.payment_amount ELSE 0 END) AS jan_payment_amount,
                     SUM(CASE WHEN (month(from_date) = 2) THEN b.payment_amount ELSE 0 END) AS feb_payment_amount,

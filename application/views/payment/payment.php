@@ -139,21 +139,13 @@
                             </div>
                             <div class="col-md-6" id="checknobox" style="display:none;">
                               <div class="form-group row">
-                                  <label for="inputEmail3" class="col-sm-3 col-form-label">Cheque No.</label>
+                                  <label id="checknobox_label" class="col-sm-3 coidm-label">Cheque No.</label>
+                                  <label id="onlinebox_label" class="col-sm-3 col-form-label">Remark</label>
                                   <div class="col-sm-9">
-                                    <input type="text" id="checkno" name="checkno" class="form-control" placeholder="Cheque no." />
+                                    <input type="text" id="checkno" name="checkno" class="form-control" placeholder="Please enter here!" />
                                   </div>
                               </div>
                             </div>
-                            <div class="col-md-6" id="onlinebox" style="display:none;">
-                              <div class="form-group row">
-                                  <label for="" class="col-sm-3 col-form-label">Remark</label>
-                                  <div class="col-sm-9">
-                                    <input type="text" id="checkno" name="checkno" class="form-control" placeholder="remark" />
-                                  </div>
-                              </div>
-                            </div>
-                            
                             </div>
                       
                       <div class="offset-1 mt-3">
@@ -361,14 +353,16 @@
     	var x = $(this).val();
     	if(x == 'cheque'){
     		$('#checknobox').show();
-    		$('#onlinebox').hide();
+    		$('#onlinebox_label').hide();
+    		$('#checknobox_label').show();
     	} else if(x == 'online'){
-    		$('#onlinebox').show();
-    		$('#checknobox').hide();
+    		$('#checknobox_label').hide();
+    		$('#onlinebox_label').show();
+    		$('#checknobox').show();
     	} 
     	else {
     		$('#checknobox').hide();
-    		$('#onlinebox').hide();
+        $('#checkno').val('');
     	}
     });
     

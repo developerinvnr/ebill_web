@@ -13,7 +13,7 @@
                             <label for="inputEmail3" class="col-form-label text-xs">Service No.<label class="text-danger">*</label></label>
                             <div class="col-sm-12">
                               <input id="bid" name="bid" type="hidden" class="form-control" value="<?php echo set_value('bid'); ?>">
-                              <select id="serviceno" name="serviceno" class="form-control">
+                              <select id="serviceno" name="serviceno" class="form-control" required>
                                 <option value="" selected>Select Service No.</option>
                                     <?php foreach($service_no as $serviceno){ ?>
                                         <option 
@@ -39,7 +39,7 @@
                         <div class="col-md-3">
                             <label for="inputEmail3" class="col-form-label text-xs">Company<label class="text-danger">*</label></label>
                             <div class="col-sm-12">
-                              <select id="company" name="company" class="form-control">
+                              <select id="company" name="company" class="form-control" required>
                                 <option value="" selected>Select Company</option>
                                     <?php foreach($companies as $company){ ?>
                                         <option value="<?php echo $company['cid']; ?>"><?php echo $company['name']; ?></option>
@@ -51,7 +51,7 @@
                         <div class="col-md-3">
                             <label for="inputEmail3" class="col-form-label text-xs">Cost-Center<label class="text-danger">*</label></label>
                             <div class="col-sm-12">
-                              <select id="costcenter" name="costcenter" class="form-control">
+                              <select id="costcenter" name="costcenter" class="form-control" required>
                                 <option value="" selected>Select Costcenter</option>
                               </select>
                               <?php echo form_error('costcenter'); ?>
@@ -60,7 +60,7 @@
                         <div class="col-md-3">
                             <label for="inputEmail3" class="col-form-label text-xs">Location<label class="text-danger">*</label></label>
                             <div class="col-sm-12">
-                              <select id="location" name="location" class="form-control">
+                              <select id="location" name="location" class="form-control" required>
                                 <option value="" selected>Select Location</option>
                                 </select>
                               <?php echo form_error('location'); ?>
@@ -89,14 +89,14 @@
                     	<div class="col row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label text-xs">Billing Period from<label class="text-danger">*</label></label>
                             <div class="col-sm-8">
-                              <input type="text" placeholder="dd/mm/YYYY" name="billing_period_from" id="billing_period_from" value="<?php echo set_value('billing_period_from'); ?>" class="form-control"/>
+                              <input type="text" placeholder="dd/mm/YYYY" name="billing_period_from" id="billing_period_from" value="<?php echo set_value('billing_period_from'); ?>" class="form-control"  required/>
                                 <?php echo form_error('billing_period_from'); ?>
                             </div>
                         </div>
                         <div class="col row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label text-xs">to<label class="text-danger">*</label></label>
                             <div class="col-sm-8">
-                              <input type="text" placeholder="dd/mm/YYYY" name="billing_period_to" id="billing_period_to" value="<?php echo set_value('billing_period_to'); ?>" class="form-control"/>
+                              <input type="text" placeholder="dd/mm/YYYY" name="billing_period_to" id="billing_period_to" value="<?php echo set_value('billing_period_to'); ?>" class="form-control"  required/>
                             <?php echo form_error('billing_period_to'); ?>
                             </div>
                         </div>
@@ -105,7 +105,7 @@
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label text-xs">Bill No.<label class="text-danger">*</label></label>
                         <div class="col-sm-4">
-                          <input type="number" name="bill_no" id="bill_no" class="form-control" value="<?php echo set_value('bill_no'); ?>" />
+                          <input type="number" name="bill_no" id="bill_no" class="form-control" value="<?php echo set_value('bill_no'); ?>"  required />
                           <?php echo form_error('bill_no'); ?>
                         </div>
                     </div>
@@ -114,14 +114,14 @@
                     	<div class="col row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label text-xs">Date of Bill<label class="text-danger">*</label></label>
                             <div class="col-sm-8">
-                              <input type="text" placeholder="dd/mm/YYYY" name="bill_date" id="bill_date" class="form-control" value="<?php echo set_value('bill_date'); ?>"/>
+                              <input type="text" placeholder="dd/mm/YYYY" name="bill_date" id="bill_date" class="form-control" value="<?php echo set_value('bill_date'); ?>"  required />
                             <?php echo form_error('bill_date'); ?>
                             </div>
                         </div>
                         <div class="col row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label text-xs">Due Date<label class="text-danger">*</label></label>
                             <div class="col-sm-8">
-                              <input type="text" placeholder="dd/mm/YYYY" name="due_date" id="due_date" class="form-control" value="<?php echo set_value('due_date'); ?>"/>
+                              <input type="text" placeholder="dd/mm/YYYY" name="due_date" id="due_date" class="form-control" value="<?php echo set_value('due_date'); ?>"  required/>
                             <?php echo form_error('due_date'); ?>
                             </div>
                         </div>
@@ -134,7 +134,7 @@
                         <div class="row">
                             <label for="inputEmail3" class="col-sm-12 col-md-4 col-form-label text-xs">Current Reading<label class="text-danger">*</label></label>
                             <div class="col-sm-12 col-md-8">
-                              <input type="number" step="0.01" name="current_reading" id="current_reading" class="form-control" value="<?php echo set_value('current_reading'); ?>" />
+                              <input type="number" step="0.01" name="current_reading" id="current_reading" class="form-control" value="<?php echo set_value('current_reading'); ?>" required />
                             <?php echo form_error('current_reading'); ?>
                             </div>
                           </div>
@@ -143,7 +143,7 @@
                         <div class="row">
                             <label for="inputEmail3" class="col-sm-12 col-md-4 col-form-label text-xs">Current Reading Date<label class="text-danger">*</label></label>
                             <div class="col-sm-12 col-md-8">
-                              <input type="text" placeholder="dd/mm/yyyy" name="current_reading_date" id="current_reading_date" class="form-control" value="<?php echo set_value('current_reading_date'); ?>"/>
+                              <input type="text" placeholder="dd/mm/yyyy" name="current_reading_date" id="current_reading_date" class="form-control" value="<?php echo set_value('current_reading_date'); ?>"  required />
                             <?php echo form_error('current_reading_date'); ?>
                             </div>
                         </div>
@@ -155,7 +155,7 @@
                     	<div class="row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label text-xs">Previous Reading<label class="text-danger">*</label></label>
                             <div class="col-sm-8">
-                              <input type="number" step="0.01" name="previous_reading" id="previous_reading" value="<?php echo set_value('previous_reading'); ?>" class="form-control"/>
+                              <input type="number" step="0.01" name="previous_reading" id="previous_reading" value="<?php echo set_value('previous_reading'); ?>" class="form-control" required />
                             <?php echo form_error('previous_reading'); ?>
                             </div>
                         </div>
@@ -164,7 +164,7 @@
                         <div class="row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label text-xs">Reading Date<label class="text-danger">*</label></label>
                             <div class="col-sm-8">
-                              <input type="text" placeholder="dd/mm/yyyy" name="previous_reading_date" id="previous_reading_date" class="form-control" value="<?php echo set_value('previous_reading_date'); ?>"/>
+                              <input type="text" placeholder="dd/mm/yyyy" name="previous_reading_date" id="previous_reading_date" class="form-control" value="<?php echo set_value('previous_reading_date'); ?>" required />
                             <?php echo form_error('previous_reading_date'); ?>
                             </div>
                         </div>
@@ -206,7 +206,7 @@
                     	<div class="row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label text-xs">Total Consumption<label class="text-danger">*</label></label>
                             <div class="col-sm-8">
-                              <input type="number" step="0.01" name="total_consumption" id="total_consumption" value="<?php echo set_value('total_consumption'); ?>" class="form-control" readonly/>
+                              <input type="number" step="0.01" name="total_consumption" id="total_consumption" value="<?php echo set_value('total_consumption'); ?>" class="form-control" required readonly/>
                             <?php echo form_error('total_consumption'); ?>
                             </div>
                         </div>
@@ -299,7 +299,7 @@
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label text-xs">Sum<label class="text-danger">*</label></label>
                         <div class="col-sm-4">
-                          <input type="number" step="0.01" name="sum" id="sum" value="<?php echo set_Value('sum');?>" class="form-control" readonly>
+                          <input type="number" step="0.01" name="sum" id="sum" value="<?php echo set_Value('sum');?>" class="form-control" required readonly>
                         <?php echo form_error('sum'); ?>
                         </div>
                     </div>
@@ -382,7 +382,7 @@
                     	<div class="row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label text-xs">Total Bill<label class="text-danger">*</label></label>
                             <div class="col-sm-8">
-                              <input type="number" step="0.01" name="total_bill" id="total_bill" value="<?php echo set_value('total_bill'); ?>" class="form-control" readonly>
+                              <input type="number" step="0.01" name="total_bill" id="total_bill" value="<?php echo set_value('total_bill'); ?>" class="form-control" required readonly>
                             <?php echo form_error('total_bill'); ?>
                             </div>
                         </div>
@@ -403,7 +403,7 @@
                     	<div class="row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label text-xs">Past Dues<label class="text-danger">*</label></label>
                             <div class="col-sm-8">
-                              <input type="number" step="0.01" name="past_due" id="past_due" value="<?php echo set_value('past_due'); ?>" class="form-control"/>
+                              <input type="number" step="0.01" name="past_due" id="past_due" value="<?php echo set_value('past_due'); ?>" class="form-control" required />
                               <?php echo form_error('past_due'); ?>
                             </div>
                         </div>
@@ -424,7 +424,7 @@
                     	<div class="row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label text-xs">Net Payable Amount<label class="text-danger">*</label></label>
                             <div class="col-sm-8">
-                              <input type="number" step="0.01" name="payable_amount" id="payable_amount" value="<?php echo set_value('payable_amount'); ?>" class="form-control" readonly>
+                              <input type="number" step="0.01" name="payable_amount" id="payable_amount" value="<?php echo set_value('payable_amount'); ?>" class="form-control" required>
                               <?php echo form_error('payable_amount'); ?>
                             </div>
                         </div>
@@ -445,7 +445,7 @@
                     	<div class="row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label text-xs">Gross Payable Amount including Surcharge<label class="text-danger">*</label></label>
                             <div class="col-sm-8">
-                              <input type="number" step="0.01" name="surcharge" id="surcharge" value="<?php echo set_value('surcharge'); ?>" class="form-control"/>
+                              <input type="number" step="0.01" name="surcharge" id="surcharge" value="<?php echo set_value('surcharge'); ?>" class="form-control" required />
                               <?php echo form_error('surcharge'); ?>
                             </div>
                         </div>
@@ -565,12 +565,10 @@
                           $("#total_consumption").prop('readonly', true);
                           $("#sum").prop('readonly', true);
                           $("#total_bill").prop('readonly', true);
-                          $("#payable_amount").prop('readonly', true);
                       } else {
                           $("#total_consumption").prop('readonly', false);
                           $("#sum").prop('readonly', false);
                           $("#total_bill").prop('readonly', false);
-                          $("#payable_amount").prop('readonly', false);
                       }
 
                       $('#serviceno').val(response.data.mid).select2();
@@ -671,16 +669,11 @@
                         $("#total_consumption").prop('readonly', true);
                         $("#sum").prop('readonly', true);
                         $("#total_bill").prop('readonly', true);
-                        $("#payable_amount").prop('readonly', true);
                     } else {
                         $("#total_consumption").prop('readonly', false);
                         $("#sum").prop('readonly', false);
                         $("#total_bill").prop('readonly', false);
-                        $("#payable_amount").prop('readonly', false);
-                    }
-                      $('#previous_reading').val(response.payment_detail[0].reading);
-                      $('#previous_reading_date').val(response.payment_detail[0].reading_date);
-                    
+                    }                    
                       $('#billing_period_from').val(response.payment_detail[0].from_date);
                     	$('#billing_period_to').val(response.payment_detail[0].to_date);
                     	$('#bill_no').val('');
@@ -689,7 +682,7 @@
                     	$('#current_reading').val('');
                     	$('#current_reading_date').val('');
                     	$('#previous_reading').val(response.payment_detail[0].previous_reading);
-                    	$('#previous_reading_date').val(response.payment_detail[0].previous_reading_date);
+                    	$('#previous_reading_date').val(response.payment_detail[0].reading_date);
 
                     	$('#power_consumption').val(response.payment_detail[0].power_consumption);
                     	$('#power_factor').val(response.payment_detail[0].power_factor);
@@ -842,21 +835,18 @@
 
             $("#sum").val(sum.toFixed(2))
 
-            var total_bill = parseFloat(sum) + parseFloat(electricity_duty) + parseFloat(cess) + parseFloat(capacitor_overload) + parseFloat(meter_fare) + parseFloat(vca) + parseFloat(past_due) + parseFloat(extra) + parseFloat(security_deposit) + parseFloat(concession_amount) + parseFloat(deviation) + parseFloat(security_fund_outstanding) + parseFloat(overload) + parseFloat(minimum_charge);
+            var total_bill = parseFloat(sum) + parseFloat(minimum_charge) + parseFloat(electricity_duty) + parseFloat(cess) + parseFloat(capacitor_overload) + parseFloat(meter_fare) + parseFloat(vca) + parseFloat(security_deposit) + parseFloat(concession_amount) + parseFloat(deviation);
 
             $("#total_bill").val(total_bill.toFixed(2))
-            $("#payable_amount").val(total_bill.toFixed(2))
 
             
             $("#total_consumption").prop('readonly', true);
             $("#sum").prop('readonly', true);
             $("#total_bill").prop('readonly', true);
-            $("#payable_amount").prop('readonly', true);
         } else {
             $("#total_consumption").prop('readonly', false);
             $("#sum").prop('readonly', false);
             $("#total_bill").prop('readonly', false);
-            $("#payable_amount").prop('readonly', false);
         }
     });
 	
